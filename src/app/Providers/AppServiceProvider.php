@@ -34,12 +34,10 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        app(){
-            URL::forceScheme('https');
-        }
+        URL::forceScheme('https');
 
-       (public_path('storage')) {
-           Artisan::call('storage:link');
-       }
+       if (!file_exists(public_path('storage'))) {
+            Artisan::call('storage:link');
+        }
     }
 }
