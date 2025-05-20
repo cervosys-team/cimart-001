@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
+        URL::forceScheme('https');
+
         // Automatically create the storage symbolic link if not exists (only in local env)
 //        if (!File::exists(public_path('storage'))) {
 //            Artisan::call('storage:link');
