@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\ShoppingCart;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        if (app()->environment('production')) {
+        if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
 
