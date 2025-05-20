@@ -34,7 +34,9 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        URL::forceScheme('https');
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
        if (!file_exists(public_path('storage'))) {
             Artisan::call('storage:link');
