@@ -1,0 +1,51 @@
+
+
+services:
+  apache:
+    image: httpd:2.4.54
+    container_name: cimart_apache
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./src/storage:/var/www/html/storage
+      - ./apache-config.conf:/usr/local/apache2/conf/httpd.conf
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php   # gunakan Dockerfile di atas
+    container_name: cimart_php
+    volumes:
+      - ./src:/var/www/html
+      - ./src/storage:/var/www/html/storage
+
+  mysql:
+    image: mysql:8.0
+    container_name: cimart_mysql
+    environment:
+      MYSQL_DATABASE: cimart-db
+      MYSQL_ROOT_PASSWORD: kiara123
+      MYSQL_USER: cimart-izer
+      MYSQL_PASSWORD: kiara1234
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+     
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: cimart_phpmyadmin
+    restart: unless-stopped
+    depends_on: [ mysql ]
+    environment:
+      PMA_HOST: mysql          # host DB = nama service MySQL
+      PMA_USER: cimart-izer
+      PMA_PASSWORD: kiara1234
+      UPLOAD_LIMIT: 128M       # naikkan kalau dump Anda besar
+    ports:
+      - "8082:80"              # akses di http://localhost:8082
+
+

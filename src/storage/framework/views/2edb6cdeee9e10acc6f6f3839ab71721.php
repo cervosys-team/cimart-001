@@ -1,0 +1,1 @@
+<?php /**PATH C:\laragon\www\cimart\resources\views/components/footer.blade.php ENDPATH**/ ?>

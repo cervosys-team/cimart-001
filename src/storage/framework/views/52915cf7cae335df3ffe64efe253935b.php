@@ -1,0 +1,1 @@
+<?php /**PATH /media/rizkir/OS/Projects/E-Commerce/cimart/resources/views/components/footer.blade.php ENDPATH**/ ?>
